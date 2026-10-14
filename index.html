@@ -20,11 +20,13 @@
             margin: 0;
             padding: 20px;
         }
+        /* Navigation Tabs */
         .nav-tabs {
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
             gap: 10px;
+            flex-wrap: wrap;
         }
         .tab-btn {
             padding: 10px 20px;
@@ -40,6 +42,7 @@
             background: #007bff;
             color: white;
         }
+        /* Main Container */
         .container {
             background: white; 
             padding: 30px; 
@@ -49,7 +52,7 @@
             box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
         }
         h1, h2 { text-align: center; color: #333; }
-        textarea, input[type="date"] { 
+        textarea, input[type="date"], input[type="text"] { 
             width: 100%; 
             border-radius: 5px; 
             border: 1px solid #ccc; 
@@ -75,6 +78,20 @@
         .result { margin-top: 20px; font-size: 18px; font-weight: bold; color: #333; }
         .tool-section { display: none; }
         .tool-section.active { display: block; }
+        
+        /* Password Options Styles */
+        .pwd-options {
+            margin-top: 15px;
+            text-align: left;
+        }
+        .pwd-options label {
+            display: block;
+            margin: 8px 0;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        /* Ad Slots for Earning */
         .ad-space {
             margin: 20px auto;
             max-width: 600px;
@@ -92,14 +109,19 @@
 
     <h1>Smart Tools Hub</h1>
 
+    <!-- TOP ADVERTISEMENT SLOT -->
     <div class="ad-space">--- Google AdSense Banner (Top) ---</div>
 
+    <!-- Navigation Menu -->
     <div class="nav-tabs">
         <button class="tab-btn active" onclick="switchTool('word-counter')">📝 Word Counter</button>
         <button class="tab-btn" onclick="switchTool('age-calculator')">🗓️ Age Calculator</button>
+        <button class="tab-btn" onclick="switchTool('password-generator')">🔑 Password Gen</button>
     </div>
 
     <div class="container">
+        
+        <!-- SECTION 1: WORD COUNTER -->
         <div id="word-counter" class="tool-section active">
             <h2>Free Word & Character Counter</h2>
             <p>Type or paste your text below:</p>
@@ -109,6 +131,7 @@
             </div>
         </div>
 
+        <!-- SECTION 2: AGE CALCULATOR -->
         <div id="age-calculator" class="tool-section">
             <h2>Exact Age Calculator</h2>
             <p>Select your Date of Birth:</p>
@@ -120,43 +143,89 @@
                 <p id="totalDaysTxt" style="color: #666; font-size: 15px;"></p>
             </div>
         </div>
+
+        <!-- SECTION 3: PASSWORD GENERATOR -->
+        <div id="password-generator" class="tool-section">
+            <h2>Secure Password Generator</h2>
+            <p>Generate a strong password instantly:</p>
+            <input type="text" id="passwordOutput" readonly placeholder="Your generated password...">
+            
+            <div class="pwd-options">
+                <label>Password Length: <input type="number" id="pwdLength" value="12" min="6" max="30" style="width:60px; padding:5px; margin-left:10px;"></label>
+                <label><input type="checkbox" id="includeNumbers" checked> Include Numbers (0-9)</label>
+                <label><input type="checkbox" id="includeSymbols" checked> Include Symbols (!@#\$%^&*)</label>
+            </div>
+            
+            <button class="calc-btn" onclick="generatePassword()">Generate Password</button>
+        </div>
+
     </div>
 
+    <!-- BOTTOM ADVERTISEMENT SLOT -->
     <div class="ad-space">--- Google AdSense Banner (Bottom) ---</div>
 
     <script>
+        // Tab Switching Logic
         function switchTool(toolId) {
             document.querySelectorAll('.tool-section').forEach(sec => sec.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
             document.getElementById(toolId).classList.add('active');
             event.target.classList.add('active');
         }
 
+        // Word Counter Logic
         function countWords() {
             let text = document.getElementById("textInput").value;
             document.getElementById("charCount").innerText = text.length;
+            
             let words = text.trim().split(/\s+/);
             document.getElementById("wordCount").innerText = text.trim() === "" ? 0 : words.length;
         }
 
+        // Age Calculator Logic
         function calculateAge() {
             let dobValue = document.getElementById('dobInput').value;
             if (!dobValue) { alert('Please select a date!'); return; }
+            
             let dob = new Date(dobValue);
             let today = new Date();
             if (dob > today) { alert('Date cannot be in the future!'); return; }
+            
             let years = today.getFullYear() - dob.getFullYear();
             let months = today.getMonth() - dob.getMonth();
             let days = today.getDate() - dob.getDate();
+            
             if (days < 0) {
                 months--;
                 days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
             }
             if (months < 0) { years--; months += 12; }
+            
             let totalDays = Math.floor((today - dob) / (1000 * 60 * 60 * 24));
-            document.getElementById('exactAgeTxt').innerHTML = `⏱️ ${years} Years, ${months} Months, and ${days} Days`;
-            document.getElementById('totalDaysTxt').innerHTML = `📅 Total Days Passed: ${totalDays.toLocaleString()} days`;
+            
+            document.getElementById('exactAgeTxt').innerHTML = `⏱️ \${years} Years, months Months, and {days} Days`;
+            document.getElementById('totalDaysTxt').innerHTML = `📅 Total Days Passed: \${totalDays.toLocaleString()} days`;
             document.getElementById('ageResult').style.display = 'block';
+        }
+
+        // Password Generator Logic
+        function generatePassword() {
+            let length = document.getElementById("pwdLength").value;
+            let includeNumbers = document.getElementById("includeNumbers").checked;
+            let includeSymbols = document.getElementById("includeSymbols").checked;
+            
+            let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (includeNumbers) charset += "0123456789";
+            if (includeSymbols) charset += "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+            
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                let randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset.charAt(randomIndex);
+            }
+            
+            document.getElementById("passwordOutput").value = password;
         }
     </script>
 </body>
