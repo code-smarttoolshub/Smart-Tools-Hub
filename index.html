@@ -262,3 +262,20 @@ function generatePDFFromText() {
 }
 </script>
 
+<!-- PDF Final Fix Script -->
+<script src="https://cloudflare.com"></script>
+<script>
+function generatePDFFromText() {
+    var doc = new jsPDF();
+    var text = document.getElementById('pdfTextInput').value;
+    if (!text.trim()) {
+        alert('Baraye meharbani pehle box mein kuch text likhein!');
+        return;
+    }
+    var lines = doc.splitTextToSize(text, 180);
+    doc.text(lines, 10, 20);
+    doc.save('Smart-Tools-Hub-Document.pdf');
+}
+</script>
+
+
