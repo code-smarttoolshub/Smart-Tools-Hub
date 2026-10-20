@@ -53,7 +53,7 @@
     </div>
 </div>
 
-<!-- Libraries -->
+<!-- html2pdf Library -->
 <script src="https://cloudflare.com"></script>
 
 <script>
@@ -87,14 +87,26 @@
         resDiv.innerText = pass;
     }
 
-    // PDF Generator Logic (FIXED)
+    // PDF Generator Logic (Ultra Stable)
     function generatePDFFromText() {
-        var doc = new jsPDF();
         var text = document.getElementById('pdfTextInput').value;
         if (!text.trim()) { alert('Baraye meharbani pehle box mein kuch text likhein!'); return; }
-        var lines = doc.splitTextToSize(text, 180);
-        doc.text(lines, 10, 20);
-        doc.save('Smart-Tools-Hub-Document.pdf');
+        
+        var element = document.createElement('div');
+        element.style.padding = '20px';
+        element.style.fontSize = '16px';
+        element.style.whiteSpace = 'pre-wrap';
+        element.innerText = text;
+        
+        var opt = {
+            margin:       1,
+            filename:     'Smart-Tools-Hub-Document.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        
+        html2pdf().set(opt).from(element).save();
     }
 </script>
 
