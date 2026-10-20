@@ -1,281 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://googletagmanager.com"></script>
-    <script>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991658909182272"
-     crossorigin="anonymous"></script>  
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-92R9DEMPFF');
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Tools Hub</title>
     <style>
-        body {
-            background-color: #f4f7f6;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        /* Navigation Tabs */
-        .nav-tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .tab-btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            background: #ddd;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .tab-btn.active {
-            background: #007bff;
-            color: white;
-        }
-        /* Main Container */
-        .container {
-            background: white; 
-            padding: 30px; 
-            max-width: 600px; 
-            margin: auto; 
-            border-radius: 10px; 
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-        }
-        h1, h2 { text-align: center; color: #333; }
-        textarea, input[type="date"], input[type="text"] { 
-            width: 100%; 
-            border-radius: 5px; 
-            border: 1px solid #ccc; 
-            padding: 12px; 
-            font-size: 16px; 
-            box-sizing: border-box;
-            margin-top: 10px;
-        }
-        textarea { height: 150px; }
-        .calc-btn {
-            width: 100%;
-            padding: 12px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-        .calc-btn:hover { background: #0056b3; }
-        .result { margin-top: 20px; font-size: 18px; font-weight: bold; color: #333; }
-        .tool-section { display: none; }
-        .tool-section.active { display: block; }
-        
-        /* Password Options Styles */
-        .pwd-options {
-            margin-top: 15px;
-            text-align: left;
-        }
-        .pwd-options label {
-            display: block;
-            margin: 8px 0;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        
-        /* Ad Slots for Earning */
-        .ad-space {
-            margin: 20px auto;
-            max-width: 600px;
-            padding: 15px;
-            background: #ebebeb;
-            border: 1px dashed #999;
-            text-align: center;
-            font-size: 12px;
-            color: #666;
-            border-radius: 5px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background: #f4f7f6; text-align: center; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); }
+        h1 { color: #333; margin-bottom: 25px; }
+        .tool-section { background: #fdfdfd; padding: 20px; margin: 20px 0; border-radius: 12px; border: 1px solid #eee; text-align: left; }
+        h2 { color: #444; font-size: 18px; margin-top: 0; }
+        textarea, input[type="date"] { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; box-sizing: border-box; margin-bottom: 10px; }
+        button { background: #007bff; color: white; border: none; padding: 12px 20px; font-size: 15px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; transition: 0.2s; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 15px; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 15px; color: #333; }
     </style>
 </head>
 <body>
 
-    <h1>Smart Tools Hub</h1>
+<div class="container">
+    <h1>🛠️ Smart Tools Hub</h1>
 
-    <!-- TOP ADVERTISEMENT SLOT -->
-    <div class="ad-space">--- Google AdSense Banner (Top) ---</div>
-
-    <!-- Navigation Menu -->
-    <div class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTool('word-counter')">📝 Word Counter</button>
-        <button class="tab-btn" onclick="switchTool('age-calculator')">🗓️ Age Calculator</button>
-        <button class="tab-btn" onclick="switchTool('password-generator')">🔑 Password Gen</button>
+    <!-- 1. WORD COUNTER -->
+    <div class="tool-section">
+        <h2>📝 Word & Character Counter</h2>
+        <textarea id="textInput" rows="4" placeholder="Yahan apna text type ya paste karein..." oninput="countText()"></textarea>
+        <div class="result">
+            Words: <span id="wordCount" style="font-weight:bold;">0</span> | Characters: <span id="charCount" style="font-weight:bold;">0</span>
+        </div>
     </div>
 
-    <div class="container">
-        
-        <!-- SECTION 1: WORD COUNTER -->
-        <div id="word-counter" class="tool-section active">
-            <h2>Free Word & Character Counter</h2>
-            <p>Type or paste your text below:</p>
-            <textarea id="textInput" placeholder="Start typing here..." oninput="countWords()"></textarea>
-            <div class="result">
-                Words: <span id="wordCount">0</span> | Characters: <span id="charCount">0</span>
-            </div>
-        </div>
-
-        <!-- SECTION 2: AGE CALCULATOR -->
-        <div id="age-calculator" class="tool-section">
-            <h2>Exact Age Calculator</h2>
-            <p>Select your Date of Birth:</p>
-            <input type="date" id="dobInput">
-            <button class="calc-btn" onclick="calculateAge()">Calculate Age</button>
-            <div class="result" id="ageResult" style="display:none; font-weight: normal; line-height: 1.6;">
-                <p><strong>Your Exact Age:</strong></p>
-                <p id="exactAgeTxt"></p>
-                <p id="totalDaysTxt" style="color: #666; font-size: 15px;"></p>
-            </div>
-        </div>
-
-        <!-- SECTION 3: PASSWORD GENERATOR -->
-        <div id="password-generator" class="tool-section">
-            <h2>Secure Password Generator</h2>
-            <p>Generate a strong password instantly:</p>
-            <input type="text" id="passwordOutput" readonly placeholder="Your generated password...">
-            
-            <div class="pwd-options">
-                <label>Password Length: <input type="number" id="pwdLength" value="12" min="6" max="30" style="width:60px; padding:5px; margin-left:10px;"></label>
-                <label><input type="checkbox" id="includeNumbers" checked> Include Numbers (0-9)</label>
-                <label><input type="checkbox" id="includeSymbols" checked> Include Symbols (!@#\$%^&*)</label>
-            </div>
-            
-            <button class="calc-btn" onclick="generatePassword()">Generate Password</button>
-        </div>
-
+    <!-- 2. AGE CALCULATOR -->
+    <div class="tool-section">
+        <h2>🎂 Age Calculator</h2>
+        <input type="date" id="dobInput">
+        <button onclick="calculateAge()">Calculate Age</button>
+        <div id="ageResult" class="result" style="display:none;"></div>
     </div>
 
-    <!-- BOTTOM ADVERTISEMENT SLOT -->
-    <div class="ad-space">--- Google AdSense Banner (Bottom) ---</div>
+    <!-- 3. PASSWORD GENERATOR -->
+    <div class="tool-section">
+        <h2>🔑 Secure Password Generator</h2>
+        <button onclick="generatePassword()" style="background: #17a2b8;">Generate Password</button>
+        <div id="passwordResult" class="result" style="display:none; font-family:monospace; font-size:16px; letter-spacing:1px;"></div>
+    </div>
 
-    <script>
-        // Tab Switching Logic
-        function switchTool(toolId) {
-            document.querySelectorAll('.tool-section').forEach(sec => sec.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById(toolId).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        // Word Counter Logic
-        function countWords() {
-            let text = document.getElementById("textInput").value;
-            document.getElementById("charCount").innerText = text.length;
-            
-            let words = text.trim().split(/\s+/);
-            document.getElementById("wordCount").innerText = text.trim() === "" ? 0 : words.length;
-        }
-
-        // Age Calculator Logic
-        function calculateAge() {
-            let dobValue = document.getElementById('dobInput').value;
-            if (!dobValue) { alert('Please select a date!'); return; }
-            
-            let dob = new Date(dobValue);
-            let today = new Date();
-            if (dob > today) { alert('Date cannot be in the future!'); return; }
-            
-            let years = today.getFullYear() - dob.getFullYear();
-            let months = today.getMonth() - dob.getMonth();
-            let days = today.getDate() - dob.getDate();
-            
-            if (days < 0) {
-                months--;
-                days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
-            }
-            if (months < 0) { years--; months += 12; }
-            
-            let totalDays = Math.floor((today - dob) / (1000 * 60 * 60 * 24));
-            
-            document.getElementById('exactAgeTxt').innerHTML = `⏱️ \${years} Years, months Months, and {days} Days`;
-            document.getElementById('totalDaysTxt').innerHTML = `📅 Total Days Passed: \${totalDays.toLocaleString()} days`;
-            document.getElementById('ageResult').style.display = 'block';
-        }
-
-        // Password Generator Logic
-        function generatePassword() {
-            let length = document.getElementById("pwdLength").value;
-            let includeNumbers = document.getElementById("includeNumbers").checked;
-            let includeSymbols = document.getElementById("includeSymbols").checked;
-            
-            let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            if (includeNumbers) charset += "0123456789";
-            if (includeSymbols) charset += "!@#$%^&*()_+~`|}{[]:;?><,./-=";
-            
-            let password = "";
-            for (let i = 0; i < length; i++) {
-                let randomIndex = Math.floor(Math.random() * charset.length);
-                password += charset.charAt(randomIndex);
-            }
-            
-            document.getElementById("passwordOutput").value = password;
-        }
-    </script>
-</body>
-</html>
-
-<!-- PDF Creator Tool HTML -->
-<div style="background: white; padding: 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: left;">
-    <h2 style="color: #333; margin-bottom: 15px; font-size: 20px;">📄 Text to PDF Converter</h2>
-    <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Yahan apna text likhein aur aik click mein PDF file download karein:</p>
-    <textarea id="pdfTextInput" rows="5" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; resize: vertical; box-sizing: border-box;" placeholder="Yahan apna مضمون یا کوئی بھی معلومات ٹائپ کریں..."></textarea>
-    <button onclick="generatePDFFromText()" style="background: #28a745; color: white; border: none; padding: 12px 25px; font-size: 15px; font-weight: bold; border-radius: 8px; margin-top: 15px; cursor: pointer; width: 100%;">Download PDF File</button>
+    <!-- 4. TEXT TO PDF CONVERTER -->
+    <div class="tool-section">
+        <h2>📄 Text to PDF Converter</h2>
+        <textarea id="pdfTextInput" rows="4" placeholder="Yahan wo text likhein jiski PDF banani hai..."></textarea>
+        <button onclick="generatePDFFromText()" style="background: #28a745;">Download PDF File</button>
+    </div>
 </div>
 
-<!-- PDF JavaScript Library & Logic -->
+<!-- Libraries -->
 <script src="https://cloudflare.com"></script>
+
 <script>
-function generatePDFFromText() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    const text = document.getElementById('pdfTextInput').value;
-    if (!text.trim()) {
-        alert('Baraye meharbani pehle box mein kuch text likhein!');
-        return;
+    // Word Counter Logic
+    function countText() {
+        let text = document.getElementById("textInput").value;
+        document.getElementById("charCount").innerText = text.length;
+        let words = text.trim().split(/\s+/).filter(w => w.length > 0);
+        document.getElementById("wordCount").innerText = words.length;
     }
-    
-    // Add text to PDF
-    const lines = doc.splitTextToSize(text, 180);
-    doc.text(lines, 10, 20);
-    
-    // Save PDF
-    doc.save('Smart-Tools-Hub-Document.pdf');
-}
+
+    // Age Calculator Logic
+    function calculateAge() {
+        let dob = document.getElementById("dobInput").value;
+        if (!dob) { alert("Pehle date select karein!"); return; }
+        let diff = Date.now() - new Date(dob).getTime();
+        let ageDate = new Date(diff);
+        let years = Math.abs(ageDate.getUTCFullYear() - 1970);
+        let resultDiv = document.getElementById("ageResult");
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML = "Aapki Umar: <strong>" + years + " Saal</strong> hai!";
+    }
+
+    // Password Generator Logic
+    function generatePassword() {
+        let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+        let pass = "";
+        for (let i = 0; i < 12; i++) { pass += chars.charAt(Math.floor(Math.random() * chars.length)); }
+        let resDiv = document.getElementById("passwordResult");
+        resDiv.style.display = "block";
+        resDiv.innerText = pass;
+    }
+
+    // PDF Generator Logic (FIXED)
+    function generatePDFFromText() {
+        var doc = new jsPDF();
+        var text = document.getElementById('pdfTextInput').value;
+        if (!text.trim()) { alert('Baraye meharbani pehle box mein kuch text likhein!'); return; }
+        var lines = doc.splitTextToSize(text, 180);
+        doc.text(lines, 10, 20);
+        doc.save('Smart-Tools-Hub-Document.pdf');
+    }
 </script>
 
-<!-- PDF Final Fix Script -->
-<script src="https://cloudflare.com"></script>
-<script>
-function generatePDFFromText() {
-    var doc = new jsPDF();
-    var text = document.getElementById('pdfTextInput').value;
-    if (!text.trim()) {
-        alert('Baraye meharbani pehle box mein kuch text likhein!');
-        return;
-    }
-    var lines = doc.splitTextToSize(text, 180);
-    doc.text(lines, 10, 20);
-    doc.save('Smart-Tools-Hub-Document.pdf');
-}
-</script>
-
-
+</body>
+</html>
