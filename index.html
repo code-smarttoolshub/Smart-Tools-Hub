@@ -40,7 +40,7 @@
         <div id="ageResult" class="result" style="display:none;"></div>
     </div>
 
-    <!-- 3. PASSWORD GENERATOR (WITH LENGTH FIX) -->
+    <!-- 3. PASSWORD GENERATOR -->
     <div class="tool-section">
         <h2>🔑 Secure Password Generator</h2>
         <span class="label-text">Enter password length (e.g., 8, 12, 16):</span>
@@ -81,7 +81,7 @@
         resultDiv.innerHTML = "Your Age is: <strong>" + years + " Years</strong>!";
     }
 
-    // Password Generator Logic (Fixed with length input)
+    // Password Generator Logic
     function generatePassword() {
         let lengthInput = document.getElementById("passwordLength").value;
         let length = parseInt(lengthInput);
