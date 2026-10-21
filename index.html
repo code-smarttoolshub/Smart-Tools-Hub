@@ -94,29 +94,21 @@
         resDiv.style.display = "block";
         resDiv.innerText = pass;
     }
+// Naya Stable PDF Function
+function generatePDFFromText() {
+    var text = document.getElementById('pdfTextInput').value;
+    if (!text.trim()) { alert('Please write some text in the box first!'); return; }
+    
+    var printWindow = window.open('', '', 'height=500,width=800');
+    printWindow.document.write('<html><head><title>Smart Tools Hub PDF</title>');
+    printWindow.document.write('<style>body{font-family:Arial; padding:30px; line-height:1.6; white-space:pre-wrap;}</style>');
+    printWindow.document.write('</head><body>');
+    printWindow.document.write(text);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    
+    // Auto trigger PDF save dialog
+    printWindow.print();
+}
 
-    // PDF Generator Logic (Ultra Stable)
-    function generatePDFFromText() {
-        var text = document.getElementById('pdfTextInput').value;
-        if (!text.trim()) { alert('Please write some text in the box first!'); return; }
-        
-        var element = document.createElement('div');
-        element.style.padding = '20px';
-        element.style.fontSize = '16px';
-        element.style.whiteSpace = 'pre-wrap';
-        element.innerText = text;
-        
-        var opt = {
-            margin:       1,
-            filename:     'Smart-Tools-Hub-Document.pdf',
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
-            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-        };
-        
-        html2pdf().set(opt).from(element).save();
-    }
-</script>
-
-</body>
-</html>
+    
