@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Tools Hub</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://googletagmanager.com"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-92R9DEMPFF');
+    </script>
     <style>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://googletagmanager.com"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-92R9DEMPFF');
-</script>
-
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background: #f4f7f6; text-align: center; }
         .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); }
         h1 { color: #333; margin-bottom: 25px; }
@@ -23,7 +22,7 @@
         button { background: #007bff; color: white; border: none; padding: 12px 20px; font-size: 15px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; transition: 0.2s; }
         button:hover { background: #0056b3; }
         .result { margin-top: 15px; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 15px; color: #333; word-break: break-all; }
-        .label-text { font-size: 14px; color: #666; margin-bottom: 5px; display: block; }<meta name="google-site-verification" content="MEzsEx3KvSn9kgWvKnZ1snIO4Q9sk7oaxHfXOLALnWM" />
+        .label-text { font-size: 14px; color: #666; margin-bottom: 5px; display: block; }
     </style>
 </head>
 <body>
@@ -66,9 +65,6 @@
     </div>
 </div>
 
-<!-- html2pdf Library -->
-<script src="https://cloudflare.com"></script>
-
 <script>
     // Word Counter Logic
     function countText() {
@@ -103,21 +99,23 @@
         resDiv.style.display = "block";
         resDiv.innerText = pass;
     }
-// Naya Stable PDF Function
-function generatePDFFromText() {
-    var text = document.getElementById('pdfTextInput').value;
-    if (!text.trim()) { alert('Please write some text in the box first!'); return; }
-    
-    var printWindow = window.open('', '', 'height=500,width=800');
-    printWindow.document.write('<html><head><title>Smart Tools Hub PDF</title>');
-    printWindow.document.write('<style>body{font-family:Arial; padding:30px; line-height:1.6; white-space:pre-wrap;}</style>');
-    printWindow.document.write('</head><body>');
-    printWindow.document.write(text);
-    printWindow.document.write('</body></html>');
-    printWindow.document.close();
-    
-    // Auto trigger PDF save dialog
-    printWindow.print();
-}
 
-    
+    // PDF Generator Logic (Ultra Stable Printer Engine)
+    function generatePDFFromText() {
+        var text = document.getElementById('pdfTextInput').value;
+        if (!text.trim()) { alert('Please write some text in the box first!'); return; }
+        
+        var printWindow = window.open('', '', 'height=500,width=800');
+        printWindow.document.write('<html><head><title>Smart Tools Hub PDF</title>');
+        printWindow.document.write('<style>body{font-family:Arial; padding:30px; line-height:1.6; white-space:pre-wrap;}</style>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(text);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        
+        printWindow.print();
+    }
+</script>
+
+</body>
+</html>
