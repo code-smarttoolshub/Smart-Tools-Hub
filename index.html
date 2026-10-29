@@ -6,7 +6,7 @@
     <title>Smart Tools Hub - 8-in-1 Bundle</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #F4F6F9; text-align: center; padding: 20px; }
-        .header-container { max-width: 750px; margin: 0 auto 20px; }
+        .header-container { max-width: 700px; margin: 0 auto 20px; }
         .adsense-banner { background: #EAEAEA; border: 1px dashed #999; padding: 10px; margin: 15px 0; border-radius: 5px; font-size: 12px; color: #666; font-weight: bold; }
         .nav-tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 25px; }
         .tab-btn { background: #E0E0E0; border: none; padding: 10px 20px; font-size: 14px; font-weight: bold; cursor: pointer; border-radius: 5px; transition: 0.2s; }
@@ -16,6 +16,7 @@
         .tool-card h2 { text-align: center; margin-top: 0; color: #212529; }
         textarea, input, select { width: 100%; padding: 12px; margin: 12px 0; border: 1px solid #ced4da; border-radius: 6px; box-sizing: border-box; font-size: 15px; }
         button.action-btn { width: 100%; background: #28a745; color: white; border: none; padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; border-radius: 6px; margin-top: 10px; }
+        .flex-row { display: flex; gap: 10px; }
     </style>
 </head>
 <body>
@@ -33,7 +34,7 @@
             <button class="tab-btn" onclick="openTool('pdf-tool')">📄 PDF Merge</button>
             <button class="tab-btn" onclick="openTool('hash-gen')">🔒 Hash Gen</button>
             <button class="tab-btn" onclick="openTool('meta-analyzer')">🔍 Meta Analyzer</button>
-            <button class="tab-btn" onclick="openTool('url-slug')">🔗 URL Slug</button>
+            <button class="tab-btn" onclick="openTool('base64-tool')">🔏 Base64 Tool</button>
         </div>
     </div>
 
@@ -99,13 +100,13 @@
         <div id="meta-output" style="margin-top: 15px; font-weight: bold;"></div>
     </div>
 
-    <!-- 8. URL SLUG GENERATOR (NEW) -->
-    <div id="url-slug" class="tool-card">
-        <h2>URL Slug Generator</h2>
-        <p style="color:#666; font-size:14px; margin-top: 0;">Convert any article title or string text into an SEO friendly URL slug:</p>
-        <input type="text" id="slug-input" placeholder="Enter text title here (e.g. Smart Tools Hub)">
-        <button class="action-btn" onclick="generateSlug()" style="background-color: #6c757d;">Generate Slug Structure</button>
-        <div id="slug-output" style="margin-top: 15px; font-weight: bold; text-align: center; color: #007BFF; font-size: 16px;"></div>
+    <!-- 8. BASE64 TOOL (NEW) -->
+    <div id="base64-tool" class="tool-card">
+        <h2>Base64 Encoder / Decoder</h2>
+        <p style="color:#666; font-size:14px; margin-top: 0;">Convert string inputs into safe Base64 binary text arrays format:</p>
+        <textarea id="base64-string" rows="3" placeholder="Enter text or string data string..."></textarea>
+        <button class="action-btn" onclick="processBase64()" style="background-color: #6c757d;">Process Data Array</button>
+        <div id="base64-output" style="margin-top: 15px; font-weight: bold; text-align: center; color: #007BFF; font-size: 16px; word-break: break-all;"></div>
     </div>
 
     <div class="header-container">
@@ -176,5 +177,3 @@
                 return;
             }
             let simulatedHash = btoa(txt).substring(0, 24).toLowerCase();
-            out.innerText = "🔒 " + algo + " Result Hash:\n" + simulatedHash;
-            out.style.color = "#212529";
