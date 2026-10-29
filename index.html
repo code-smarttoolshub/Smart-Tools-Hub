@@ -34,7 +34,7 @@
             <button class="tab-btn" onclick="openTool('pdf-tool')">📄 PDF Merge</button>
             <button class="tab-btn" onclick="openTool('hash-gen')">🔒 Hash Gen</button>
             <button class="tab-btn" onclick="openTool('meta-analyzer')">🔍 Meta Analyzer</button>
-            <button class="tab-btn" onclick="openTool('percentage-calc')">📊 Percentage</button>
+            <button class="tab-btn" onclick="openTool('random-num')">🎲 Random Num</button>
         </div>
     </div>
 
@@ -100,17 +100,16 @@
         <div id="meta-output" style="margin-top: 15px; font-weight: bold;"></div>
     </div>
 
-    <!-- 8. PERCENTAGE CALCULATOR (NEW) -->
-    <div id="percentage-calc" class="tool-card">
-        <h2>Simple Percentage Calculator</h2>
-        <p style="color:#666; font-size:14px; margin-top: 0;">Enter values below to calculate rates quickly:</p>
-        <div class="flex-row" style="align-items: center;">
-            <input type="number" id="perc-rate" placeholder="Rate (%)" style="margin: 0;">
-            <span style="font-weight: bold;">% of</span>
-            <input type="number" id="perc-amount" placeholder="Amount" style="margin: 0;">
+    <!-- 8. RANDOM NUMBER GENERATOR (NEW) -->
+    <div id="random-num" class="tool-card">
+        <h2>Random Number Generator</h2>
+        <p style="color:#666; font-size:14px; margin-top: 0;">Generate a custom random value between ranges natively:</p>
+        <div class="flex-row">
+            <input type="number" id="num-min" value="1" placeholder="Min Value">
+            <input type="number" id="num-max" value="100" placeholder="Max Value">
         </div>
-        <button class="action-btn" onclick="calculatePercentage()" style="background-color: #6f42c1;">Calculate Value</button>
-        <div id="perc-result" style="margin-top: 15px; font-weight: bold; text-align: center; color: #6f42c1; font-size: 18px;"></div>
+        <button class="action-btn" onclick="generateRandomNum()" style="background-color: #28a745;">Generate Number</button>
+        <div id="random-result" style="margin-top: 20px; text-align: center; font-size: 22px; font-weight: bold; color: #28a745;"></div>
     </div>
 
     <div class="header-container">
@@ -177,3 +176,6 @@
             const out = document.getElementById('hash-output');
             if(!txt) {
                 out.innerText = "⚠️ Please enter some text.";
+                out.style.color = "red";
+                return;
+            }
